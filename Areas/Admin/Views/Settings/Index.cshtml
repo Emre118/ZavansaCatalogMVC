@@ -1,0 +1,23 @@
+@model SiteSetting
+@{
+    ViewData["Title"] = "Site Ayarları";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0">Site Ayarları</h1>
+    <a asp-action="Edit" class="btn btn-zavansa">Düzenle</a>
+</div>
+
+<div class="card card-body">
+    <dl class="row mb-0">
+        <dt class="col-sm-3">Marka</dt><dd class="col-sm-9">@Model.BrandName</dd>
+        <dt class="col-sm-3">Slogan</dt><dd class="col-sm-9">@Model.Slogan</dd>
+        <dt class="col-sm-3">Hakkımızda</dt><dd class="col-sm-9">@Model.AboutText</dd>
+        <dt class="col-sm-3">Telefon</dt><dd class="col-sm-9">@Model.Phone</dd>
+        <dt class="col-sm-3">E-posta</dt><dd class="col-sm-9">@Model.Email</dd>
+        <dt class="col-sm-3">Adres</dt><dd class="col-sm-9">@Model.Address</dd>
+        <dt class="col-sm-3">Instagram</dt><dd class="col-sm-9">@Model.InstagramUrl</dd>
+        <dt class="col-sm-3">WhatsApp</dt><dd class="col-sm-9">@Model.WhatsAppUrl</dd>
+        <dt class="col-sm-3">Katalog PDF</dt><dd class="col-sm-9">@Model.CatalogPdfUrl</dd>
+    </dl>
+</div>

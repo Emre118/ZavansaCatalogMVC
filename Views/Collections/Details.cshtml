@@ -1,0 +1,30 @@
+@model ProductCollection
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<section class="page-hero py-5">
+    <div class="container">
+        <h1>@Model.Name</h1>
+        <p class="lead mb-0">@Model.Description</p>
+    </div>
+</section>
+
+<section class="container py-5">
+    <div class="row g-4">
+        @foreach (var product in Model.Products.OrderBy(product => product.Name))
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="product-card h-100">
+                    <img src="@(product.ImageUrl ?? "/images/placeholders/product-placeholder.svg")" alt="@product.Name" />
+                    <div class="p-3">
+                        <div class="meta-label">@product.Category?.Name</div>
+                        <h5 class="mt-2">@product.Name</h5>
+                        <p class="text-muted">@product.ShortDescription</p>
+                        <a class="btn btn-zavansa" asp-controller="Products" asp-action="Details" asp-route-id="@product.Id">Detayları Gör</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>

@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = "PDF Katalog";
+    var catalogExists = ViewBag.CatalogExists as bool? ?? false;
+    var catalogUrl = ViewBag.CatalogUrl as string ?? "/catalog/zavansa-katalog.pdf";
+}
+
+<section class="page-hero py-5">
+    <div class="container">
+        <h1>PDF Katalog</h1>
+        <p class="lead mb-0">Zavansa ürün kataloğunu görüntüleyin veya indirin.</p>
+    </div>
+</section>
+
+<section class="container py-5">
+    @if (catalogExists)
+    {
+        <div class="d-flex flex-wrap gap-2 mb-4">
+            <a class="btn btn-zavansa" href="@catalogUrl" target="_blank" rel="noopener">Kataloğu Aç</a>
+            <a class="btn btn-outline-dark" href="@catalogUrl" download>İndir</a>
+        </div>
+        <iframe src="@catalogUrl" class="w-100 border rounded-2" style="height: 720px;" title="Zavansa PDF Katalog"></iframe>
+    }
+    else
+    {
+        <div class="alert alert-light border">PDF katalog dosyası daha sonra eklenecektir.</div>
+    }
+</section>

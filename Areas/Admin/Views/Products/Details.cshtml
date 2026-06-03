@@ -1,0 +1,30 @@
+@model Product
+@{
+    ViewData["Title"] = "Ürün Detayı";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0">@Model.Name</h1>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-zavansa">Düzenle</a>
+</div>
+
+<div class="card card-body">
+    <div class="row g-4">
+        <div class="col-md-4">
+            <img class="img-fluid rounded-2" src="@(Model.ImageUrl ?? "/images/placeholders/product-placeholder.svg")" alt="@Model.Name" />
+        </div>
+        <div class="col-md-8">
+            <dl class="row">
+                <dt class="col-sm-4">Kategori</dt><dd class="col-sm-8">@Model.Category?.Name</dd>
+                <dt class="col-sm-4">Koleksiyon</dt><dd class="col-sm-8">@Model.ProductCollection?.Name</dd>
+                <dt class="col-sm-4">Kısa Açıklama</dt><dd class="col-sm-8">@Model.ShortDescription</dd>
+                <dt class="col-sm-4">Açıklama</dt><dd class="col-sm-8">@Model.Description</dd>
+                <dt class="col-sm-4">Ölçüler</dt><dd class="col-sm-8">@Model.Width / @Model.Height</dd>
+                <dt class="col-sm-4">Malzeme</dt><dd class="col-sm-8">@Model.Material</dd>
+                <dt class="col-sm-4">Ampül Tipi</dt><dd class="col-sm-8">@Model.BulbType</dd>
+                <dt class="col-sm-4">Renkler</dt><dd class="col-sm-8">@Model.Colors</dd>
+                <dt class="col-sm-4">Fiyat</dt><dd class="col-sm-8">@(Model.Price?.ToString("C") ?? "-")</dd>
+            </dl>
+        </div>
+    </div>
+</div>

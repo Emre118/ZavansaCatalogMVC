@@ -1,0 +1,11 @@
+@model Category
+@{
+    ViewData["Title"] = "Kategori Detayı";
+}
+
+<h1 class="h3 mb-4">@Model.Name</h1>
+<div class="card card-body">
+    <p>@Model.Description</p>
+    <p><strong>Aktif:</strong> @(Model.IsActive ? "Evet" : "Hayır")</p>
+    <p><strong>Ürün Sayısı:</strong> @Model.Products.Count</p>
+</div>

@@ -1,0 +1,29 @@
+@model IEnumerable<ProductCollection>
+@{
+    ViewData["Title"] = "Koleksiyonlar";
+}
+
+<section class="page-hero py-5">
+    <div class="container">
+        <h1>Koleksiyonlar</h1>
+        <p class="lead mb-0">Zavansa ürünlerini tasarım çizgilerine göre keşfedin.</p>
+    </div>
+</section>
+
+<section class="container py-5">
+    <div class="row g-4">
+        @foreach (var collection in Model)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="collection-card h-100">
+                    <img src="@(collection.ImageUrl ?? "/images/placeholders/product-placeholder.svg")" alt="@collection.Name" />
+                    <div class="p-4">
+                        <h4>@collection.Name</h4>
+                        <p class="text-muted">@collection.Description</p>
+                        <a class="btn btn-zavansa" asp-action="Details" asp-route-id="@collection.Id">Koleksiyonu Gör</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>

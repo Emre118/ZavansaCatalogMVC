@@ -1,0 +1,38 @@
+@model DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0">Dashboard</h1>
+    <a class="btn btn-zavansa" asp-controller="Products" asp-action="Create">Yeni Ürün</a>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-6 col-xl-3"><div class="card"><div class="card-body"><div class="text-muted">Toplam Ürün</div><div class="h2">@Model.TotalProductCount</div></div></div></div>
+    <div class="col-md-6 col-xl-3"><div class="card"><div class="card-body"><div class="text-muted">Aktif Ürün</div><div class="h2">@Model.ActiveProductCount</div></div></div></div>
+    <div class="col-md-6 col-xl-3"><div class="card"><div class="card-body"><div class="text-muted">Koleksiyon Sayısı</div><div class="h2">@Model.CollectionCount</div></div></div></div>
+    <div class="col-md-6 col-xl-3"><div class="card"><div class="card-body"><div class="text-muted">Okunmamış Mesaj</div><div class="h2">@Model.UnreadMessageCount</div></div></div></div>
+</div>
+
+<div class="card">
+    <div class="card-header bg-white">Son Mesajlar</div>
+    <div class="table-responsive">
+        <table class="table mb-0 align-middle">
+            <thead><tr><th>Gönderen</th><th>E-posta</th><th>Konu</th><th>Durum</th><th>Tarih</th><th></th></tr></thead>
+            <tbody>
+                @foreach (var message in Model.LatestMessages)
+                {
+                    <tr>
+                        <td>@message.FullName</td>
+                        <td>@message.Email</td>
+                        <td>@message.Subject</td>
+                        <td>@message.Status</td>
+                        <td>@message.CreatedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</td>
+                        <td><a asp-controller="Messages" asp-action="Details" asp-route-id="@message.Id" class="btn btn-sm btn-outline-dark">Gör</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+@model IEnumerable<ContactMessage>
+@{
+    ViewData["Title"] = "Mesajlar";
+}
+
+<h1 class="h3 mb-4">Mesajlar</h1>
+
+<div class="card">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>Gönderen</th>
+                    <th>E-posta</th>
+                    <th>Telefon</th>
+                    <th>Konu</th>
+                    <th>Durum</th>
+                    <th>Tarih</th>
+                    <th class="text-end">İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var message in Model)
+                {
+                    <tr>
+                        <td>@message.FullName</td>
+                        <td>@message.Email</td>
+                        <td>@message.Phone</td>
+                        <td>@message.Subject</td>
+                        <td>@message.Status</td>
+                        <td>@message.CreatedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-dark" asp-action="Details" asp-route-id="@message.Id">Detay</a>
+                            <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@message.Id">Sil</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

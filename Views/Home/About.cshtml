@@ -1,0 +1,21 @@
+@model SiteSetting?
+@{
+    ViewData["Title"] = "Hakkımızda";
+}
+
+<section class="page-hero py-5">
+    <div class="container">
+        <h1>Hakkımızda</h1>
+        <p class="lead mb-0">Zavansa Aydınlatma ve Dekor</p>
+    </div>
+</section>
+
+<section class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <p class="fs-5">
+                @(Model?.AboutText ?? "Zavansa, modern yaşam alanları için avize, aplik, masa lambası ve dekoratif aydınlatma ürünleri sunan bir aydınlatma ve dekor markasıdır. Hafif malzemeler, modern tasarımlar ve katalog tabanlı ürün sunumu ile kullanıcıların ürünleri sade bir şekilde incelemesini sağlar.")
+            </p>
+        </div>
+    </div>
+</section>

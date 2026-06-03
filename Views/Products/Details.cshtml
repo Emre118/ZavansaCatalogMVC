@@ -1,0 +1,30 @@
+@model Product
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<section class="container py-5">
+    <div class="row g-5">
+        <div class="col-lg-6">
+            <img class="product-detail-image rounded-2" src="@(Model.ImageUrl ?? "/images/placeholders/product-placeholder.svg")" alt="@Model.Name" />
+        </div>
+        <div class="col-lg-6">
+            <div class="meta-label">@Model.Category?.Name / @Model.ProductCollection?.Name</div>
+            <h1 class="fw-bold mt-2">@Model.Name</h1>
+            <p class="lead">@Model.ShortDescription</p>
+            <p>@Model.Description</p>
+            <dl class="row">
+                <dt class="col-sm-4">Genişlik</dt><dd class="col-sm-8">@(Model.Width ?? "-")</dd>
+                <dt class="col-sm-4">Yükseklik</dt><dd class="col-sm-8">@(Model.Height ?? "-")</dd>
+                <dt class="col-sm-4">Malzeme</dt><dd class="col-sm-8">@(Model.Material ?? "-")</dd>
+                <dt class="col-sm-4">Ampül Tipi</dt><dd class="col-sm-8">@(Model.BulbType ?? "-")</dd>
+                <dt class="col-sm-4">Renkler</dt><dd class="col-sm-8">@(Model.Colors ?? "-")</dd>
+                @if (Model.Price.HasValue)
+                {
+                    <dt class="col-sm-4">Fiyat</dt><dd class="col-sm-8">@Model.Price.Value.ToString("C")</dd>
+                }
+            </dl>
+            <a class="btn btn-zavansa btn-lg" asp-controller="Contact" asp-action="Index" asp-route-productId="@Model.Id">Teklif Al / İletişime Geç</a>
+        </div>
+    </div>
+</section>

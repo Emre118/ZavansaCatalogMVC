@@ -1,0 +1,18 @@
+@model Product
+@{
+    ViewData["Title"] = "Yeni Ürün";
+}
+
+<h1 class="h3 mb-4">Yeni Ürün</h1>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data" class="card card-body">
+    <partial name="_ProductForm" model="Model" />
+    <div class="mt-4 d-flex gap-2">
+        <button type="submit" class="btn btn-zavansa">Kaydet</button>
+        <a asp-action="Index" class="btn btn-outline-dark">Vazgeç</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

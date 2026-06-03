@@ -1,0 +1,91 @@
+@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Ana Sayfa";
+    var settings = ViewBag.Settings as SiteSetting;
+    var collections = ViewBag.Collections as IEnumerable<ProductCollection> ?? Enumerable.Empty<ProductCollection>();
+}
+
+<section class="hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <p class="text-uppercase accent fw-semibold mb-3">Ürün Kataloğu</p>
+                <h1 class="fw-bold mb-4">@(settings?.BrandName ?? "Zavansa Aydınlatma ve Dekor")</h1>
+                <p class="lead mb-4">@(settings?.Slogan ?? "Modern yaşam alanları için özgün aydınlatma tasarımları")</p>
+                <div class="d-flex flex-wrap gap-2">
+                    <a class="btn btn-zavansa btn-lg" asp-controller="Products" asp-action="Index">Ürünleri İncele</a>
+                    <a class="btn btn-outline-light btn-lg" asp-controller="Catalog" asp-action="Index">PDF Katalog</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container py-5">
+    <div class="row g-3">
+        <div class="col-md-6 col-lg-3">
+            <div class="feature-card p-4 h-100"><h5>Benzersiz Tasarımlar</h5><p class="text-muted mb-0">Modern formlar ve dekoratif ışık etkileri.</p></div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="feature-card p-4 h-100"><h5>Esnek ve Sağlam</h5><p class="text-muted mb-0">Günlük kullanıma uygun dayanıklı ürün yapısı.</p></div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="feature-card p-4 h-100"><h5>Extra Hafif, Kolay Montaj</h5><p class="text-muted mb-0">Hafif malzemelerle pratik kurulum avantajı.</p></div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="feature-card p-4 h-100"><h5>Geri Dönüşüme Uygun</h5><p class="text-muted mb-0">Sürdürülebilir üretim anlayışını destekleyen yaklaşım.</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="section-title mb-0">Öne Çıkan Ürünler</h2>
+        <a asp-controller="Products" asp-action="Index" class="link-dark">Tüm Ürünler</a>
+    </div>
+    <div class="row g-4">
+        @foreach (var product in Model)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="product-card h-100">
+                    <img src="@(product.ImageUrl ?? "/images/placeholders/product-placeholder.svg")" alt="@product.Name" />
+                    <div class="p-3">
+                        <div class="meta-label">@product.Category?.Name / @product.ProductCollection?.Name</div>
+                        <h5 class="mt-2">@product.Name</h5>
+                        <p class="text-muted">@product.ShortDescription</p>
+                        <a class="btn btn-sm btn-zavansa" asp-controller="Products" asp-action="Details" asp-route-id="@product.Id">Detayları Gör</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<section class="container py-5">
+    <h2 class="section-title">Koleksiyonlar</h2>
+    <div class="row g-4">
+        @foreach (var collection in collections)
+        {
+            <div class="col-md-6 col-lg-3">
+                <div class="collection-card h-100">
+                    <img src="@(collection.ImageUrl ?? "/images/placeholders/product-placeholder.svg")" alt="@collection.Name" />
+                    <div class="p-3">
+                        <h5>@collection.Name</h5>
+                        <p class="text-muted small">@collection.Description</p>
+                        <a asp-controller="Collections" asp-action="Details" asp-route-id="@collection.Id" class="btn btn-outline-dark btn-sm">İncele</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<section class="page-hero py-5">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+        <div>
+            <h2 class="mb-2">Bir ürün hakkında bilgi almak ister misiniz?</h2>
+            <p class="mb-0 text-muted">Katalog ürünleri için iletişim formundan teklif veya detay talebi oluşturabilirsiniz.</p>
+        </div>
+        <a class="btn btn-zavansa" asp-controller="Contact" asp-action="Index">İletişime Geç</a>
+    </div>
+</section>

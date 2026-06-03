@@ -1,0 +1,11 @@
+@model Category
+@{
+    ViewData["Title"] = "Kategori Sil";
+}
+
+<h1 class="h3 mb-4">Kategori Sil</h1>
+<div class="alert alert-danger">“@Model.Name” kategorisini silmek istediğinizden emin misiniz?</div>
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+    <button class="btn btn-danger" type="submit">Sil</button>
+    <a asp-action="Index" class="btn btn-outline-dark">Vazgeç</a>
+</form>

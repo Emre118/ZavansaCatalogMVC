@@ -1,0 +1,71 @@
+@model ContactFormViewModel
+@{
+    ViewData["Title"] = "İletişim";
+    var settings = ViewBag.Settings as SiteSetting;
+}
+
+<section class="page-hero py-5">
+    <div class="container">
+        <h1>İletişim</h1>
+        <p class="lead mb-0">Ürünler ve katalog hakkında bilgi almak için formu doldurun.</p>
+    </div>
+</section>
+
+<section class="container py-5">
+    <div class="row g-5">
+        <div class="col-lg-7">
+            <form asp-action="Index" method="post" class="row g-3">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input asp-for="ProductId" type="hidden" />
+                <input asp-for="InterestedProductName" type="hidden" />
+                @if (!string.IsNullOrWhiteSpace(Model.InterestedProductName))
+                {
+                    <div class="col-12">
+                        <div class="alert alert-light border">İlgilenilen ürün: <strong>@Model.InterestedProductName</strong></div>
+                    </div>
+                }
+                <div class="col-md-6">
+                    <label asp-for="FullName" class="form-label"></label>
+                    <input asp-for="FullName" class="form-control" />
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Phone" class="form-label"></label>
+                    <input asp-for="Phone" class="form-control" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Subject" class="form-label"></label>
+                    <input asp-for="Subject" class="form-control" />
+                    <span asp-validation-for="Subject" class="text-danger"></span>
+                </div>
+                <div class="col-12">
+                    <label asp-for="Message" class="form-label"></label>
+                    <textarea asp-for="Message" class="form-control" rows="5"></textarea>
+                    <span asp-validation-for="Message" class="text-danger"></span>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-zavansa">Mesaj Gönder</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-5">
+            <div class="p-4 bg-white border rounded-2">
+                <h4>İletişim Bilgileri</h4>
+                <p class="text-muted mb-4">Katalog ürünleri hakkında bilgi ve teklif talepleri için bize ulaşabilirsiniz.</p>
+                <p><strong>Telefon:</strong> @(settings?.Phone ?? "-")</p>
+                <p><strong>E-posta:</strong> @(settings?.Email ?? "-")</p>
+                <p><strong>Adres:</strong> @(settings?.Address ?? "-")</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,17 @@
+@model ProductCollection
+@{
+    ViewData["Title"] = "Yeni Koleksiyon";
+}
+
+<h1 class="h3 mb-4">Yeni Koleksiyon</h1>
+<form asp-action="Create" method="post" class="card card-body">
+    <partial name="_CollectionForm" model="Model" />
+    <div class="mt-4 d-flex gap-2">
+        <button class="btn btn-zavansa" type="submit">Kaydet</button>
+        <a asp-action="Index" class="btn btn-outline-dark">Vazgeç</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

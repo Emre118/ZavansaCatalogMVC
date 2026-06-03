@@ -1,0 +1,18 @@
+@model Product
+@{
+    ViewData["Title"] = "Ürün Düzenle";
+}
+
+<h1 class="h3 mb-4">Ürün Düzenle</h1>
+
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data" class="card card-body">
+    <partial name="_ProductForm" model="Model" />
+    <div class="mt-4 d-flex gap-2">
+        <button type="submit" class="btn btn-zavansa">Güncelle</button>
+        <a asp-action="Index" class="btn btn-outline-dark">Vazgeç</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
