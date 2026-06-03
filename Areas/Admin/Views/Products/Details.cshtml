@@ -1,6 +1,7 @@
 @model Product
 @{
     ViewData["Title"] = "Ürün Detayı";
+    var productImageUrl = string.IsNullOrWhiteSpace(Model.ImageUrl) ? "/images/placeholders/product-placeholder.svg" : Model.ImageUrl;
 }
 
 <div class="d-flex justify-content-between align-items-center mb-4">
@@ -11,7 +12,7 @@
 <div class="card card-body">
     <div class="row g-4">
         <div class="col-md-4">
-            <img class="img-fluid rounded-2" src="@(Model.ImageUrl ?? "/images/placeholders/product-placeholder.svg")" alt="@Model.Name" />
+            <img class="img-fluid rounded-2 admin-detail-image" src="@productImageUrl" alt="@Model.Name" onerror="this.onerror=null;this.src='/images/placeholders/product-placeholder.svg';" />
         </div>
         <div class="col-md-8">
             <dl class="row">

@@ -8,6 +8,49 @@ public static class DbInitializer
 {
     private const string PlaceholderImage = "/images/placeholders/product-placeholder.svg";
 
+    private static readonly IReadOnlyDictionary<string, string> ProductImagePaths = new Dictionary<string, string>
+    {
+        ["LAVA Beton Avize"] = "/images/products/lava-beton-avize.jpg",
+        ["LUMEN Beton Avize"] = "/images/products/lumen-beton-avize.jpg",
+        ["ORBIT Beton Avize"] = "/images/products/orbit-beton-avize.jpg",
+        ["LAVA 2'li Beton Avize"] = "/images/products/lava-2li-beton-avize.jpg",
+        ["LAVA 3'lü Beton Avize"] = "/images/products/lava-3lu-beton-avize.jpg",
+        ["LAVA 5'li Beton Avize"] = "/images/products/lava-5li-beton-avize.jpg",
+        ["LAVA 3'lü V2 Beton Avize"] = "/images/products/lava-3lu-v2-beton-avize.jpg",
+        ["LUMEN 3'lü Beton Avize"] = "/images/products/lumen-3lu-beton-avize.jpg",
+        ["HIKARI Avize"] = "/images/products/hikari-avize.jpg",
+        ["SATORI Avize"] = "/images/products/satori-avize.jpg",
+        ["LINO Avize"] = "/images/products/lino-avize.jpg",
+        ["Aniko Avize"] = "/images/products/aniko-avize.jpg",
+        ["Oromi Avize"] = "/images/products/oromi-avize.jpg",
+        ["Abysell Long Avize"] = "/images/products/abysell-long-avize.jpg",
+        ["Abysell Avize"] = "/images/products/abysell-avize.jpg",
+        ["Twisted v1 Avize"] = "/images/products/twisted-v1-avize.jpg",
+        ["Twisted v2 Avize"] = "/images/products/twisted-v2-avize.jpg",
+        ["Vori v1 Avize"] = "/images/products/vori-v1-avize.jpg",
+        ["Vori v2 Avize"] = "/images/products/vori-v2-avize.jpg",
+        ["Stone Glow Aplik"] = "/images/products/stone-glow-aplik.jpg",
+        ["Aqua Masa Lambası"] = "/images/products/aqua-masa-lambasi.jpg",
+        ["Void Masa Lambası"] = "/images/products/void-masa-lambasi.jpg",
+        ["Arco Abajur Beyaz"] = "/images/products/arco-abajur-beyaz.jpg",
+        ["Arco Abajur Kumlu Bej"] = "/images/products/arco-abajur-kumlu-bej.jpg",
+        ["Ufo Lamp"] = "/images/products/ufo-lamp.jpg",
+        ["Roket Masa/Gece Lambası"] = "/images/products/roket-masa-gece-lambasi.jpg",
+        ["Roket 2 Masa/Gece Lamp"] = "/images/products/roket-2-masa-gece-lambasi.jpg"
+    };
+
+    private static readonly IReadOnlyDictionary<string, string> CollectionImagePaths = new Dictionary<string, string>
+    {
+        ["Beton Collection"] = "/images/collections/beton-collection.jpg",
+        ["Ori Design Collection"] = "/images/collections/ori-design-collection.jpg",
+        ["Monolit Collection"] = "/images/collections/monolit-collection.jpg",
+        ["Modern Twisted Collection"] = "/images/collections/modern-twisted-collection.jpg",
+        ["Stone Glow"] = "/images/collections/stone-glow.jpg",
+        ["Masa Lambaları"] = "/images/collections/masa-lambalari.jpg",
+        ["Arco Abajur"] = "/images/collections/arco-abajur.jpg",
+        ["Çocuk Odası Aydınlatma"] = "/images/collections/cocuk-odasi-aydinlatma.jpg"
+    };
+
     public static void Initialize(IServiceProvider serviceProvider)
     {
         using var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
@@ -17,6 +60,7 @@ public static class DbInitializer
         SeedCategories(context);
         SeedCollections(context);
         SeedProducts(context);
+        UpdateSeededImagePaths(context);
         SeedSettings(context);
         SeedAdmin(context);
     }
@@ -36,6 +80,34 @@ public static class DbInitializer
             new Category { Name = "Çocuk Odası Aydınlatma", Description = "Çocuk odaları için renkli ve eğlenceli dekoratif ışıklar." });
 
         context.SaveChanges();
+    }
+
+    private static void UpdateSeededImagePaths(ApplicationDbContext context)
+    {
+        var hasChanges = false;
+
+        foreach (var product in context.Products)
+        {
+            if (ProductImagePaths.TryGetValue(product.Name, out var imageUrl) && product.ImageUrl != imageUrl)
+            {
+                product.ImageUrl = imageUrl;
+                hasChanges = true;
+            }
+        }
+
+        foreach (var collection in context.ProductCollections)
+        {
+            if (CollectionImagePaths.TryGetValue(collection.Name, out var imageUrl) && collection.ImageUrl != imageUrl)
+            {
+                collection.ImageUrl = imageUrl;
+                hasChanges = true;
+            }
+        }
+
+        if (hasChanges)
+        {
+            context.SaveChanges();
+        }
     }
 
     private static void SeedCollections(ApplicationDbContext context)

@@ -25,8 +25,9 @@
             <tbody>
                 @foreach (var product in Model)
                 {
+                    var productImageUrl = string.IsNullOrWhiteSpace(product.ImageUrl) ? "/images/placeholders/product-placeholder.svg" : product.ImageUrl;
                     <tr>
-                        <td><img class="thumb" src="@(product.ImageUrl ?? "/images/placeholders/product-placeholder.svg")" alt="@product.Name" /></td>
+                        <td><img class="thumb" src="@productImageUrl" alt="@product.Name" onerror="this.onerror=null;this.src='/images/placeholders/product-placeholder.svg';" /></td>
                         <td>@product.Name</td>
                         <td>@product.Category?.Name</td>
                         <td>@product.ProductCollection?.Name</td>

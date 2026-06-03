@@ -1,12 +1,13 @@
 @model Product
 @{
     ViewData["Title"] = Model.Name;
+    var productImageUrl = string.IsNullOrWhiteSpace(Model.ImageUrl) ? "/images/placeholders/product-placeholder.svg" : Model.ImageUrl;
 }
 
 <section class="container py-5">
     <div class="row g-5">
         <div class="col-lg-6">
-            <img class="product-detail-image rounded-2" src="@(Model.ImageUrl ?? "/images/placeholders/product-placeholder.svg")" alt="@Model.Name" />
+            <img class="product-detail-image rounded-2" src="@productImageUrl" alt="@Model.Name" onerror="this.onerror=null;this.src='/images/placeholders/product-placeholder.svg';" />
         </div>
         <div class="col-lg-6">
             <div class="meta-label">@Model.Category?.Name / @Model.ProductCollection?.Name</div>

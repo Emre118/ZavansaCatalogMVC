@@ -14,9 +14,10 @@
     <div class="row g-4">
         @foreach (var collection in Model)
         {
+            var collectionImageUrl = string.IsNullOrWhiteSpace(collection.ImageUrl) ? "/images/placeholders/product-placeholder.svg" : collection.ImageUrl;
             <div class="col-md-6 col-lg-4">
                 <div class="collection-card h-100">
-                    <img src="@(collection.ImageUrl ?? "/images/placeholders/product-placeholder.svg")" alt="@collection.Name" />
+                    <img src="@collectionImageUrl" alt="@collection.Name" onerror="this.onerror=null;this.src='/images/placeholders/product-placeholder.svg';" />
                     <div class="p-4">
                         <h4>@collection.Name</h4>
                         <p class="text-muted">@collection.Description</p>

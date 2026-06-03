@@ -67,7 +67,22 @@ body {
 .collection-card img,
 .product-detail-image {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    background: var(--z-soft);
+}
+
+.product-card img,
+.collection-card img {
+    height: 240px;
+}
+
+.product-detail-image {
+    height: min(520px, 70vh);
+}
+
+.collection-detail-image {
+    width: 100%;
+    height: min(360px, 48vh);
     object-fit: cover;
     background: var(--z-soft);
 }
@@ -112,4 +127,10 @@ body {
     height: 52px;
     object-fit: cover;
     border-radius: 6px;
+}
+
+.admin-detail-image {
+    width: 100%;
+    max-height: 320px;
+    object-fit: cover;
 }

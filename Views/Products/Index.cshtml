@@ -55,9 +55,10 @@
     <div class="row g-4">
         @foreach (var product in Model.Products)
         {
+            var productImageUrl = string.IsNullOrWhiteSpace(product.ImageUrl) ? "/images/placeholders/product-placeholder.svg" : product.ImageUrl;
             <div class="col-md-6 col-lg-4">
                 <div class="product-card h-100">
-                    <img src="@(product.ImageUrl ?? "/images/placeholders/product-placeholder.svg")" alt="@product.Name" />
+                    <img src="@productImageUrl" alt="@product.Name" onerror="this.onerror=null;this.src='/images/placeholders/product-placeholder.svg';" />
                     <div class="p-3">
                         <div class="meta-label">@product.Category?.Name / @product.ProductCollection?.Name</div>
                         <h5 class="mt-2">@product.Name</h5>

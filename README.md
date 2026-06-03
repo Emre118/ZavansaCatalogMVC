@@ -87,6 +87,10 @@ Demo admin şifresi veritabanında düz metin olarak tutulmaz; `PasswordHasher<A
 
 Repository içindeki `docs/zavansa-katalog-2026-subat.pdf` dosyası `wwwroot/catalog/zavansa-katalog.pdf` konumuna kopyalanmıştır. Public katalog sayfası bu dosyayı açma ve indirme bağlantısı sunar.
 
+## Ürün ve Koleksiyon Görselleri
+
+Ürün görselleri `wwwroot/images/products` klasöründe, koleksiyon görselleri ise `wwwroot/images/collections` klasöründe saklanır. Seed verilerindeki görsel yolları bu kalıcı dosyalara göre güncellenir.
+
 ## Notlar
 
 - Bu proje bir ürün katalog sitesidir, e-ticaret sitesi değildir.

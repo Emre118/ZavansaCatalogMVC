@@ -10,11 +10,13 @@
 
 <div class="card">
     <table class="table table-hover mb-0 align-middle">
-        <thead><tr><th>Sıra</th><th>Ad</th><th>Açıklama</th><th>Aktif</th><th class="text-end">İşlemler</th></tr></thead>
+        <thead><tr><th>Görsel</th><th>Sıra</th><th>Ad</th><th>Açıklama</th><th>Aktif</th><th class="text-end">İşlemler</th></tr></thead>
         <tbody>
             @foreach (var collection in Model)
             {
+                var collectionImageUrl = string.IsNullOrWhiteSpace(collection.ImageUrl) ? "/images/placeholders/product-placeholder.svg" : collection.ImageUrl;
                 <tr>
+                    <td><img class="thumb" src="@collectionImageUrl" alt="@collection.Name" onerror="this.onerror=null;this.src='/images/placeholders/product-placeholder.svg';" /></td>
                     <td>@collection.DisplayOrder</td>
                     <td>@collection.Name</td>
                     <td>@collection.Description</td>
